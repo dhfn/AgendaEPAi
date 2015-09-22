@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.epa.diego.agendaepai" >
+    package="br.epa.diego.agendaepai"
+    android:installLocation="auto">
 
     <application
         android:allowBackup="true"

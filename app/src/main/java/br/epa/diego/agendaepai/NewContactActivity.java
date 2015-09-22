@@ -42,7 +42,7 @@ public class NewContactActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
-
+            setResult(1);
             finish();
             return true;
         }

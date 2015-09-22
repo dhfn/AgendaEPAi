@@ -16,13 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(new ListAdapter(this, getContacts()));
     }
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
             Intent i = new Intent(this, NewContactActivity.class);
-            startActivity(i);
+            startActivityForResult(i, 1);
             return true;
         }
 
@@ -53,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        List<Contact> list = getContacts();
+        list.add(new Contact("Maria Julia", "9591234323","Av. Sebastião Diniz, 847"));
+
+        if (resultCode == 1){
+            listView.setAdapter(new ListAdapter(this, list));
+        }
+
     }
 
     public List<Contact> getContacts(){
@@ -63,30 +72,6 @@ public class MainActivity extends AppCompatActivity {
         contacts.add(new Contact("Mateus Pereira", "9591362782", "Rua José Silveira"));
 
         return contacts;
-    }
-
-    public class Contact{
-        private String name;
-        private String phone;
-        private String address;
-
-        public Contact(String name, String phone, String address){
-            this.name = name;
-            this.phone = phone;
-            this.address = address;
-        }
-
-        public String getName(){
-            return this.name;
-        }
-
-        public String getPhone(){
-            return this.phone;
-        }
-
-        public String getAddress(){
-            return this.address;
-        }
     }
 
     public class ListAdapter extends ArrayAdapter<Contact> {
