@@ -11,4 +11,7 @@
     <string name="tv_addres">Endereço</string>
     <string name="bt_map">Mapa</string>
 
+    <string name="api_key_maps">AIzaSyClWZVLkrDuikjD2now_6hesDR8IoEiHhQ</string>
+    <string name="title_activity_show_contact">ShowContactActivity</string>
+
 </resources>
