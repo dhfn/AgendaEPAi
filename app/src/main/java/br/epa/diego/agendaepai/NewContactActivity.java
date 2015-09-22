@@ -42,6 +42,12 @@ public class NewContactActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
+            DBHelper db = new DBHelper(this);
+            db.insertContact(new Contact(
+                    etName.getText().toString(),
+                    etPhone.getText().toString(),
+                    etAddress.getText().toString()
+            ));
             setResult(1);
             finish();
             return true;

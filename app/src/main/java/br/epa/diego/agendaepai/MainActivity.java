@@ -2,6 +2,7 @@ package br.epa.diego.agendaepai;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,14 +18,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
+    DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new DBHelper(this);
 
         listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(new ListAdapter(this, getContacts()));
+        listView.setAdapter(new ListAdapter(this, db.getContacts()));
     }
 
     @Override
@@ -55,11 +58,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        List<Contact> list = getContacts();
-        list.add(new Contact("Maria Julia", "9591234323","Av. Sebastião Diniz, 847"));
-
         if (resultCode == 1){
-            listView.setAdapter(new ListAdapter(this, list));
+            listView.setAdapter(new ListAdapter(this, db.getContacts()));
         }
 
     }
